@@ -13,7 +13,7 @@
 #Update 23.11.23 23:00
 
 ### Issue
-1. None
+None
 
 
 ### List of Flask page
