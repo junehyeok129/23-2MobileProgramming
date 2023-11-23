@@ -24,5 +24,5 @@ None
 
 ### List of DataBase Table
 
-1. User Information
+1. User Information </br>
    ID/ Password/ Name/ ClassID
