@@ -6,8 +6,15 @@
 
 ## 페르소나 템플릿 : https://xtensio.com/user-persona-template/?ref=contentharmony.com
 
+## Figma Page : https://www.figma.com/file/JV4NboV02fWMYw2HfcJvmn/%EB%AA%A8%EB%B0%94%EC%9D%BC%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?type=design&node-id=11-702&mode=design&t=fvIEtfSYyvPzPukD-0
+
+
 
 #Update 23.11.23 23:00
+
+### Issue
+1. None
+
 
 ### List of Flask page
 
