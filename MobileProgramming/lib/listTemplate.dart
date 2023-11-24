@@ -3,6 +3,30 @@ import 'package:loa/main.dart';
 
 class ListTemplate extends StatelessWidget {
   @override
+
+  final List<Map<String, dynamic>> course = [
+    {
+      'name': '모바일 프로그래밍',
+      'professor': '김부근 교수'
+    },
+    {
+      'name':'멀티코어 컴퓨팅',
+      'professor':'김준영 교수'
+    },
+    {
+      'name':'알고리즘',
+      'professor':'조윤식 교수'
+    },
+    {
+      'name':'데이터베이스 설계',
+      'professor':'이재성 교수'
+    },
+    {
+      'name':'이산수학',
+      'professor':'이창희 교수'
+    }
+
+  ];
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -25,28 +49,89 @@ class ListTemplate extends StatelessWidget {
       ),
       drawer: LoaDrawer(),
       //TODO
-      body: ListView(
-        padding: const EdgeInsets.all(8),
-        children: [
-          Container(
-            height: 50,
-            child: const Center(
-              child: Text('리스트를',style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30
-              ),),
+      body: showlist(),
+    );
+  }
+  Widget showlist(){
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: course.length,
+      itemBuilder: (BuildContext context, int i){
+        String name = course[i]['name'];
+        String professer = course[i]['professor'];
+
+        return Column(
+          children: [
+            Container(
+              height: 10,
             ),
-          ),
-          Container(
-            height: 50,
-            child: const Center(
-              child: Text('만드시오',style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30),
-            ),
-          )),
-        ],
-      ),
+            InkWell(
+              onTap: (){
+                //여기에 route 지정해줘서 움직이도록
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0,10),
+                      blurRadius: 80,
+                      color: Color(0xFFD3D3D3).withOpacity(.84),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(50),
+                      height: 50,
+                      width: 20
+                    ),
+                    Container(
+                      height: 30,
+                      width: 30,
+                      child: Center(
+                        child: Image.asset('assets/images/listTemplate.png'),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(50),
+                      height: 50,
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(name,
+                              style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600
+                              ),),
+                        Text(professer,
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.w200
+                          ),)
+                      ],
+                    ),
+                    Expanded(child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                        Icon(
+                           Icons.chevron_right,
+                           size: 50, //Icon Size
+                         ),
+                        ],
+                      ),
+                    ))
+
+                  ],
+                ),
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }
