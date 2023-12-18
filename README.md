@@ -26,3 +26,10 @@ None
 
 1. User Information </br>
    ID/ Password/ Name/ ClassID
+
+2. 게시글 정보
+   Title / Contents / Name / Date
+
+3. 댓글 정보
+   Name / Comment
+
