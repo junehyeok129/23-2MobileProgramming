@@ -104,6 +104,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
                         width: 15,
                       ),
                       Text(
+                        // <DB> 제목에 대한 데이터베이스에서 받아온 텍스트
                         "Q. Dart가 너무 어려워요",
                         style: TextStyle(
                           fontSize: 28,
@@ -122,10 +123,12 @@ class _BoardTemplateState extends State<BoardTemplate> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      //<DB> 받아온 날짜 정보
                       Text('2023.10.04 00:37'),
                       SizedBox(
                         width: 5,
                       ),
+                      //<DB> DB로 받아온 익명 or 실명 닉네임 정보
                       Text('익명'),
                       SizedBox(
                         width: 15,
@@ -139,6 +142,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
                   const Row(
                     children: [
                       SizedBox(width: 15),
+                      //<DB> 제목 DB와 매칭되는 내용 테이블에서 받아온 데이터 정보
                       Text('dart를 공부하려는데 하나도 모르겠어요. 어쩌죠? 진짜 급해요 '),
                     ],
                   ),
@@ -174,6 +178,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(width: 15),
+                      //<DB> DB로 받아온 익명 or 실명 닉네임 정보
                       Text('익명', style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
