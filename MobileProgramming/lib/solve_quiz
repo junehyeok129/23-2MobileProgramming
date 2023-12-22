@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main(){
-  runApp(solve_quiz());
-}
-
 class solve_quiz extends StatelessWidget {
   final TextEditingController quiz_1 = TextEditingController();
   final TextEditingController quiz_2 = TextEditingController();
