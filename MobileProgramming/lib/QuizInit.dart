@@ -52,7 +52,7 @@ class QuizInit extends StatelessWidget {
         drawer: LoaDrawer(),
         body: TabBarView(
           children: [
-            SolveQuiz(),
+            quiz_main(),
             MakeQuiz()
           ],
         ),
