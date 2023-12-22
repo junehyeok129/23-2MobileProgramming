@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loa/QuizInit.dart';
 import 'package:loa/initPage.dart';
 import 'package:loa/login.dart';
 import 'package:loa/listTemplate.dart';
@@ -9,6 +10,8 @@ import 'package:loa/loadrawer.dart';
 import 'package:loa/questionInit.dart';
 import 'package:loa/noteshareInit.dart';
 import 'package:loa/boardInit.dart';
+import 'questionInit.dart';
+
 void main() {
   runApp(const Loa());
 }
@@ -26,7 +29,7 @@ class Loa extends StatelessWidget {
       home: Login(),
       routes: {
         '/init' : (context) => InitPage(),
-        //'/quiz' : (context) => Quiz(),
+        '/quiz' : (context) => QuizInit(),
         '/question' : (context) => QuestionInit(),
         '/sharenote' : (context) => NoteShareInit(),
         '/board' : (context) => BoardInit(),
