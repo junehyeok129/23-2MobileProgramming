@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+
+class LayoutDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      elevation: 5.0,
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [Text("메뉴"),
+            Icon(Icons.menu)],
+          )),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.home),
+                const Text('Home'),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/ home주소');
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.shopping_bag_outlined),
+                const Text('퀴즈'),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/퀴즈주소');
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.query_stats),
+                const Text('Q & A'),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/Q & A 주소');
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.note_alt_outlined),
+                const Text('노트 공유'),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/노트공유 주소');
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.note_alt_outlined),
+                const Text('게시판'),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/게시판 주소');
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Icon(Icons.note_alt_outlined),
+                const Text('pick'),
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/pick 주소');
+            },
+          ),
+        ],
+      ),
+    );
+  }}
