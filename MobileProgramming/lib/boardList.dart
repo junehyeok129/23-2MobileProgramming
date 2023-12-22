@@ -3,16 +3,16 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
 
-class QuestionList extends StatefulWidget {
+class BoardList extends StatefulWidget {
   final String subject;
 
-  QuestionList({required this.subject});
+  BoardList({required this.subject});
 
   @override
-  _QuestionListState createState() => _QuestionListState();
+  _BoardListState createState() => _BoardListState();
 }
 
-class _QuestionListState extends State<QuestionList> {
+class _BoardListState extends State<BoardList> {
   List<Map<String, dynamic>> course = [];
 
 
@@ -24,7 +24,7 @@ class _QuestionListState extends State<QuestionList> {
       },
       body: jsonEncode({
         'subject': widget.subject,
-        'boardtype': 'question',
+        'boardtype': 'board',
       }),
     );
 

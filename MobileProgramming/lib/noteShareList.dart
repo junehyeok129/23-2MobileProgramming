@@ -3,16 +3,16 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
 
-class QuestionList extends StatefulWidget {
+class NoteShareList extends StatefulWidget {
   final String subject;
 
-  QuestionList({required this.subject});
+  NoteShareList({required this.subject});
 
   @override
-  _QuestionListState createState() => _QuestionListState();
+  _NoteShareListState createState() => _NoteShareListState();
 }
 
-class _QuestionListState extends State<QuestionList> {
+class _NoteShareListState extends State<NoteShareList> {
   List<Map<String, dynamic>> course = [];
 
 
@@ -24,7 +24,7 @@ class _QuestionListState extends State<QuestionList> {
       },
       body: jsonEncode({
         'subject': widget.subject,
-        'boardtype': 'question',
+        'boardtype': 'sharenote',
       }),
     );
 
@@ -54,34 +54,6 @@ class _QuestionListState extends State<QuestionList> {
   Widget build(BuildContext context) {
     if (course.isEmpty) {
       return Scaffold(
-          appBar: AppBar(
-            leading: Builder(
-              builder: (BuildContext context) {
-                return IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  icon: Image.asset('assets/images/menulogo.png'),
-                );
-              },
-            ),
-            title: Text(
-              '과목 목록',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ),
-          drawer: LoaDrawer(),
-          body: Center(
-            child: Text(
-              '게시물이 없습니다!',
-              style: TextStyle(fontSize: 20),
-            ),
-          )
-      );
-    } else {
-      return Scaffold(
         appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
@@ -101,8 +73,36 @@ class _QuestionListState extends State<QuestionList> {
           ),
         ),
         drawer: LoaDrawer(),
-        body: showlist(),
-      );}
+        body: Center(
+          child: Text(
+            '게시물이 없습니다!',
+            style: TextStyle(fontSize: 20),
+          ),
+        )
+      );
+    } else {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: Image.asset('assets/images/menulogo.png'),
+            );
+          },
+        ),
+        title: Text(
+          '과목 목록',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
+      drawer: LoaDrawer(),
+      body: showlist(),
+    );}
   }
 
   Widget showlist() {

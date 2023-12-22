@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:loa/initPage.dart';
 import 'package:loa/login.dart';
 import 'package:loa/listTemplate.dart';
+import 'package:loa/noteshareInit.dart';
 import 'package:loa/signup.dart';
 import 'package:loa/boardTemplate.dart';
 import 'package:loa/loadrawer.dart';
 import 'package:loa/questionInit.dart';
-
+import 'package:loa/noteshareInit.dart';
+import 'package:loa/boardInit.dart';
 void main() {
   runApp(const Loa());
 }
@@ -26,8 +28,8 @@ class Loa extends StatelessWidget {
         '/init' : (context) => InitPage(),
         //'/quiz' : (context) => Quiz(),
         '/question' : (context) => QuestionInit(),
-        //'sharenote' : (context) => ShareNote(),
-        //'/board' : (context) => Board(),
+        '/sharenote' : (context) => NoteShareInit(),
+        '/board' : (context) => BoardInit(),
         //'/pick' : (context) => Pick()
       },
     );
