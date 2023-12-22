@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(solve_quiz());
+}
+
+class solve_quiz extends StatelessWidget {
+  final TextEditingController quiz_1 = TextEditingController();
+  final TextEditingController quiz_2 = TextEditingController();
+  List<Map<String, dynamic>> quizitems = [
+    {'question':'1번 문제',
+      'answer':'2번 문제'},
+    {'question': '21번 문제',
+    'answer': ' null'
+    }
+
+  ];
+  Widget build(BuildContext context){
+    return MaterialApp(
+        title: "solve_quiz",
+        home: Scaffold(
+          appBar: AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text('Quiz')],
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    //여기에 뒤로 가는 route걸어주기
+                  },
+                )
+              ]
+          ),
+          //drawer: ,
+          body: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: quizitems.length,
+              itemBuilder: (BuildContext context, int i){
+              String Question =  quizitems[i]['question'];
+
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+
+                        Text('Q$i: $Question',style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600
+                        ),),
+                        Container(
+                          height: 10,
+                        ),
+                        TextField(
+                          controller: quiz_1,
+                          decoration: InputDecoration(
+                            labelText: 'Answer',
+                        )
+                        )
+
+                      ]
+                      ,
+                    ),
+                    ),
+                  ),
+
+                ],
+              );
+              }),
+          bottomNavigationBar: BottomAppBar(
+            child: ElevatedButton(
+                onPressed: (){}
+                , child: Text('Submit'))
+          ),
+
+        )
+    );
+  }
+}
