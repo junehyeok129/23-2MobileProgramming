@@ -65,6 +65,7 @@ class _BoardListState extends State<BoardList> {
                 );
               },
             ),
+
             title: Text(
               '과목 목록',
               style: TextStyle(
@@ -72,13 +73,21 @@ class _BoardListState extends State<BoardList> {
               ),
             ),
           ),
+
           drawer: LoaDrawer(),
           body: Center(
             child: Text(
               '게시물이 없습니다!',
               style: TextStyle(fontSize: 20),
             ),
-          )
+          ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+
+          },
+          child: Icon(Icons.add),
+        ),
       );
     } else {
       return Scaffold(
@@ -100,8 +109,16 @@ class _BoardListState extends State<BoardList> {
             ),
           ),
         ),
+
         drawer: LoaDrawer(),
         body: showlist(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+
+          },
+          child: Icon(Icons.add),
+        ),
       );}
   }
 

@@ -78,7 +78,14 @@ class _QuestionListState extends State<QuestionList> {
               '게시물이 없습니다!',
               style: TextStyle(fontSize: 20),
             ),
-          )
+          ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+
+          },
+          child: Icon(Icons.add),
+        ),
       );
     } else {
       return Scaffold(
@@ -100,8 +107,16 @@ class _QuestionListState extends State<QuestionList> {
             ),
           ),
         ),
+
         drawer: LoaDrawer(),
         body: showlist(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+
+          },
+          child: Icon(Icons.add),
+        ),
       );}
   }
 

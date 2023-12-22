@@ -11,6 +11,7 @@ import 'package:loa/questionInit.dart';
 import 'package:loa/noteshareInit.dart';
 import 'package:loa/boardInit.dart';
 import 'questionInit.dart';
+import 'package:loa/pick.dart';
 
 void main() {
   runApp(const Loa());
@@ -22,18 +23,20 @@ class Loa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
       home: Login(),
       routes: {
+        '/login' : (context) => Login(),
         '/init' : (context) => InitPage(),
         '/quiz' : (context) => QuizInit(),
         '/question' : (context) => QuestionInit(),
         '/sharenote' : (context) => NoteShareInit(),
         '/board' : (context) => BoardInit(),
-        //'/pick' : (context) => Pick()
+        '/pick' : (context) => Pick()
       },
     );
   }

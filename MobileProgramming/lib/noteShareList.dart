@@ -73,6 +73,13 @@ class _NoteShareListState extends State<NoteShareList> {
           ),
         ),
         drawer: LoaDrawer(),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
+
+            },
+            child: Icon(Icons.add),
+          ),
         body: Center(
           child: Text(
             '게시물이 없습니다!',
