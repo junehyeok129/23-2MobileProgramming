@@ -29,17 +29,23 @@ class _SolveQuizState extends State<SolveQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Column(
-            children: [
-              Text('QUIZ'),
-              Text('과목명',style: TextStyle(fontSize: 10),)
-            ],
-          ),
-        ),
-
-      ),
+        appBar: AppBar(
+        leading: Builder(
+        builder: (BuildContext context) {
+      return IconButton(
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
+        icon: Image.asset('assets/images/menulogo.png'),
+      );
+    },
+    ),
+    title: Text(
+    'Quiz',
+    style: TextStyle(
+    color: Colors.black,
+    ),
+    ),),
       drawer: LoaDrawer(),
       body: ListView.builder(
         scrollDirection: Axis.vertical,

@@ -10,20 +10,20 @@ class quiz_createState extends State<quiz_create> {
   String first_number='1';
   bool isChecked = false;
   bool isChecked2 = false;
-  
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-      title: Center(child: Text('Quiz')),
+        title: Center(child: Text('Quiz')),
 
       ),
       drawer: LoaDrawer(),
       body: Container(
         margin: EdgeInsets.fromLTRB(50, 50, 50, 50),
         decoration: BoxDecoration(
-          color: Colors.amber[100],
-          borderRadius: BorderRadius.circular(20)
+            color: Colors.amber[100],
+            borderRadius: BorderRadius.circular(20)
         ),
         padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
         child: Column(
@@ -63,35 +63,35 @@ class quiz_createState extends State<quiz_create> {
             SizedBox(height: 30,),
             Text('2. 맞춘 문제 표시 여부'),
             SizedBox(height: 10,),
-       
-             Row(
-               children: [
-                 Text('예'),
-                 Checkbox(
-                     value: isChecked,
-                     onChanged: (bool? newValue){
-                       setState(() {
-                         isChecked = newValue!;
-                       });
-                     },
 
-                   activeColor: Colors.black,
-                   checkColor: Colors.white,
-                     ),
-                 Text('아니오'),
-                 Checkbox(
-                   value: isChecked2,
-                   onChanged: (bool? newValue){
-                     setState(() {
-                       isChecked2 = newValue!;
-                     });
-                   },
+            Row(
+              children: [
+                Text('예'),
+                Checkbox(
+                  value: isChecked,
+                  onChanged: (bool? newValue){
+                    setState(() {
+                      isChecked = newValue!;
+                    });
+                  },
 
-                   activeColor: Colors.black,
-                   checkColor: Colors.white,
-                 ),
-               ],
-             ),
+                  activeColor: Colors.black,
+                  checkColor: Colors.white,
+                ),
+                Text('아니오'),
+                Checkbox(
+                  value: isChecked2,
+                  onChanged: (bool? newValue){
+                    setState(() {
+                      isChecked2 = newValue!;
+                    });
+                  },
+
+                  activeColor: Colors.black,
+                  checkColor: Colors.white,
+                ),
+              ],
+            ),
             SizedBox(height: 30,),
             Divider(thickness: 1, height: 1, color: Colors.black,),
             SizedBox(height: 50,),

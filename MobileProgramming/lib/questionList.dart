@@ -34,11 +34,20 @@ class _QuestionListState extends State<QuestionList> {
       final jsonData = jsonDecode(response.body);
       final dataList = jsonData['data'] as List<dynamic>;
 
+      print(jsonData['data']);
+      print(dataList);
       setState(() {
 
         course = dataList.map((data) => {
+
+          'id' : data['id'],
+          'user' : data['user'],
           'title': data['title'],
-          'id' : data['id']
+          'content' : data['content'],
+          'date': data['date'],
+          'like' : data['like'],
+          'dislike' : data['dislike'],
+          'anonymous': data['anonymous']
           // 필요한 다른 필드도 추가할 수 있음
         }).toList();
       });
@@ -137,7 +146,7 @@ class _QuestionListState extends State<QuestionList> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(
-                        builder: (context) => BoardTemplate(boardid: boardid),
+                        builder: (context) => BoardTemplate(boardid: boardid,),
                     ),
                 );
 

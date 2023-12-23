@@ -16,6 +16,7 @@ import 'package:loa/pick.dart';
 import 'package:loa/boardTemplate.dart';
 import 'solvequiz.dart';
 
+
 //최준혁 제작
 void main() {
   runApp(const Loa());
@@ -41,7 +42,7 @@ class Loa extends StatelessWidget {
         '/sharenote' : (context) => NoteShareInit(),
         '/board' : (context) => BoardInit(),
         '/pick' : (context) => Pick(),
-        '/content' : (context) => BoardTemplate(boardid: "1",),
+        //'/content' : (context) => BoardTemplate(boardid: "1",),
         '/quiz_create': (context)=> quiz_create(),
         '/solvequiz': (context)=> SolveQuiz()
       },

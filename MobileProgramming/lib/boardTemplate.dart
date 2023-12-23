@@ -3,9 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
 
+
 class BoardTemplate extends StatefulWidget {
   final String boardid;
   BoardTemplate({required this.boardid});
+
+
 
   @override
   _BoardTemplateState createState() => _BoardTemplateState();
@@ -37,29 +40,24 @@ class _BoardTemplateState extends State<BoardTemplate> {
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       final dataList = jsonData['commentdata'] as List<dynamic>;
-
       setState(() {
         course = dataList.map((data) {
           return {
-            'questionid': data['questionid'],
-            'user': data['user'],
-            'content': data['content'],
-            'time': data['time'],
-            'anonymous': data['anoymous'],
+            'name': data['user'], // 사용자 이름
+            'writer': data['content'], // 댓글 내용
           };
         }).toList();
       });
     }
   }
 
+
   @override
   void initState() {
-    fetchData(); // 데이터 가져오기
+    fetchData();
     super.initState();
   }
-
   List<Comment> comments = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,12 +95,12 @@ class _BoardTemplateState extends State<BoardTemplate> {
               ),
               child: Column(
                 children: [
-                  // 데이터를 사용하여 질문과 작성 시간, 작성자 이름, 본문 내용 표시
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        course.isNotEmpty ? course[0]['name'] : '',
+                        "Q. Dart가 너무 어려워요",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -111,34 +109,47 @@ class _BoardTemplateState extends State<BoardTemplate> {
                     ],
                   ),
                   Divider(thickness: 1, height: 1, color: Colors.black),
+
+                  // 날짜 추가
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text('2023.10.04 00:37'),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('익명'),
-                      SizedBox(
-                        width: 15,
-                      ),
+                      Expanded(child: Row(
+                        children: [
+                          Text('2023.10.04 00:37'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('익명'),
+                          SizedBox(
+                            width: 15,
+                          ),
+                        ],
+                      ))
                     ],
                   ),
+
+                  // 본문 내용 추가
+
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                     child: Row(
                       children: [
                         SizedBox(width: 15),
                         SizedBox(
-                          width: 330,
-                          child: Text(
-                            course.isNotEmpty ? course[0]['writer'] : '',
-                            maxLines: 100,
-                          ),
-                        ),
+                          width: 350,
+                            child : Text("String textContent = 'dart를 공부하려는데 하나도 모르겠어요. 어쩌죠? 진짜 급해요 어떻게해요 정말 진짜 미치겠어요 네? ㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ대ㅔ';",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold
+                            ),)
+                        //AutoAdjustTextSize()
+                        )
                       ],
                     ),
                   ),
+
+                  // 본문 하트와 신고 아이콘 추가
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -151,14 +162,15 @@ class _BoardTemplateState extends State<BoardTemplate> {
                       IconButton(
                         onPressed: onclickedHeart,
                         icon: Icon(
-                          isHeart ? Icons.favorite : Icons.favorite_border,
+                          isHeart
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                         ),
                         color: Colors.red,
                       ),
                     ],
                   ),
-
-                  // course 리스트를 사용하여 게시판 항목 생성
+                  // 데이터를 사용하여 질문과 작성 시간, 작성자 이름, 본문 내용 표시
                   for (var courseItem in course)
                     Column(
                       children: [
@@ -168,13 +180,13 @@ class _BoardTemplateState extends State<BoardTemplate> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                courseItem['name'],
+                                courseItem['name'], // 사용자 이름
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(courseItem['writer']),
+                                  Text(courseItem['writer']), // 댓글 내용
                                   Row(
                                     children: [
                                       IconButton(
@@ -270,6 +282,23 @@ class _BoardTemplateState extends State<BoardTemplate> {
   void onclickedDisLike_0() {
     setState(() {
       disLike_0 = !disLike_0;
+    });
+  }
+
+  void onclickedLike_1() {
+    setState(() {
+      isLike_1 = !isLike_1;
+    });
+  }
+
+  void onclickedDisLike_1() {
+    setState(() {
+      disLike_1 = !disLike_1;
+    });
+  }
+  void changetext(text){
+    setState(() {
+
     });
   }
 }

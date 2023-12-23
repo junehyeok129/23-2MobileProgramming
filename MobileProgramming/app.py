@@ -137,6 +137,7 @@ def get_comment():
     
     comment_list = []
     for row in rows:
+        print(row)
         comment_dict = {
             'questionid': row[0],
             'user': row[1],
