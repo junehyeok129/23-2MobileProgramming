@@ -34,8 +34,6 @@ class _QuestionListState extends State<QuestionList> {
       final jsonData = jsonDecode(response.body);
       final dataList = jsonData['data'] as List<dynamic>;
 
-      print(jsonData['data']);
-      print(dataList);
       setState(() {
 
         course = dataList.map((data) => {
@@ -43,8 +41,6 @@ class _QuestionListState extends State<QuestionList> {
           'id' : data['id']
           // 필요한 다른 필드도 추가할 수 있음
         }).toList();
-        print("이게 코스다!");
-        print(course);
       });
     }
   }

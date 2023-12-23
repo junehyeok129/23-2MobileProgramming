@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:loa/loadrawer.dart';
 
 class BoardTemplate extends StatefulWidget {
   final String boardid;
@@ -29,19 +30,22 @@ class _BoardTemplateState extends State<BoardTemplate> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode({
-        'subject': widget.boardid,
+        'boardid': widget.boardid,
       }),
     );
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
-      final dataList = jsonData['data'] as List<dynamic>;
+      final dataList = jsonData['commentdata'] as List<dynamic>;
 
       setState(() {
         course = dataList.map((data) {
           return {
-            'name': data['title'],
-            'writer': data['content'],
+            'questionid': data['questionid'],
+            'user': data['user'],
+            'content': data['content'],
+            'time': data['time'],
+            'anonymous': data['anoymous'],
           };
         }).toList();
       });
@@ -77,6 +81,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
           ),
         ),
       ),
+      drawer: LoaDrawer(),
       body: ListView(
         children: [
           Padding(

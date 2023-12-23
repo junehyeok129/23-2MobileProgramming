@@ -127,15 +127,26 @@ def get_board():
 @app.route('/get_comment',methods=['POST'])
 def get_comment():
     data = request.json
-    subject = data.get('subject')
     boardid = data.get('boardid')
     
     conn = sqlite3.connect('./database.db')
     cursor = conn.cursor()
     
-    cursor.execute('SELECT * FROM boardcomment WHERE boardid = ?'.format(boardid))
+    cursor.execute('SELECT * FROM boardcomment WHERE questionid = ?', (boardid,))
+    rows = cursor.fetchall()
     
-    return jsonify({'success' : True, 'message' : "조회 성공"})
+    comment_list = []
+    for row in rows:
+        comment_dict = {
+            'questionid': row[0],
+            'user': row[1],
+            'content': row[2],
+            'time': row[3],
+            'anonymous': row[4]
+        }
+        comment_list.append(comment_dict)
+    
+    return jsonify({'success' : True, 'message' : "조회 성공",'commentdata' : comment_list})
 
 
 @app.route('/get_petInfo', methods=['POST'])
