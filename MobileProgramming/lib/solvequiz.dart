@@ -12,16 +12,17 @@ class _SolveQuizState extends State<SolveQuiz> {
   final List<TextEditingController> quizControllers = [
     TextEditingController(),
     TextEditingController(),
+    TextEditingController(),
   ];
 
   List<Map<String, dynamic>> quizItems = [
     {
       'question': '1번 문제',
-      'answer': '2번 문제',
+      'answer': '1번 답안',
     },
     {
       'question': '21번 문제',
-      'answer': null,
+      'answer': '2번 답안',
     },
   ];
 
@@ -82,6 +83,7 @@ class _SolveQuizState extends State<SolveQuiz> {
                       controller: quizControllers[i],
                       decoration: InputDecoration(
                         labelText: 'Answer',
+
                       ),
                     ),
                   ],
@@ -95,12 +97,61 @@ class _SolveQuizState extends State<SolveQuiz> {
         child: ElevatedButton(
           onPressed: () {
             // submit logic 구현
+            checkAnswers();
+
           },
           child: Text('Submit'),
         ),
       ),
     );
   }
+
+  void checkAnswers() {
+    List<String> correctAnswers = [];
+    List<String> incorrectAnswers = [];
+
+    for (int i = 0; i < quizItems.length; i++) {
+      String enteredAnswer = quizControllers[i].text;
+      String correctAnswer = quizItems[i]['answer'];
+
+      if (enteredAnswer == correctAnswer) {
+        correctAnswers.add('Q${i + 1}: $correctAnswer');
+      } else {
+        incorrectAnswers.add('Q${i + 1}: Correct Answer is $correctAnswer');
+      }
+    }
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Quiz Results'),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (correctAnswers.isNotEmpty)
+                Text('Correct Answers:'),
+              for (String correctAnswer in correctAnswers)
+                Text(correctAnswer, style: TextStyle(color: Colors.green)),
+              if (incorrectAnswers.isNotEmpty)
+                Text('Incorrect Answers:'),
+              for (String incorrectAnswer in incorrectAnswers)
+                Text(incorrectAnswer, style: TextStyle(color: Colors.red)),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   void dispose() {
