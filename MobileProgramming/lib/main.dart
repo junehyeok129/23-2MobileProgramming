@@ -4,6 +4,7 @@ import 'package:loa/initPage.dart';
 import 'package:loa/login.dart';
 import 'package:loa/listTemplate.dart';
 import 'package:loa/noteshareInit.dart';
+import 'package:loa/quiz_create.dart';
 import 'package:loa/signup.dart';
 import 'package:loa/boardTemplate.dart';
 import 'package:loa/loadrawer.dart';
@@ -13,6 +14,7 @@ import 'package:loa/boardInit.dart';
 import 'questionInit.dart';
 import 'package:loa/pick.dart';
 import 'package:loa/boardTemplate.dart';
+import 'solvequiz.dart';
 
 //최준혁 제작
 void main() {
@@ -39,9 +41,9 @@ class Loa extends StatelessWidget {
         '/sharenote' : (context) => NoteShareInit(),
         '/board' : (context) => BoardInit(),
         '/pick' : (context) => Pick(),
-        '/content' : (context) => BoardTemplate(
-          boardid: "1",
-        )
+        '/content' : (context) => BoardTemplate(boardid: "1",),
+        '/quiz_create': (context)=> quiz_create(),
+        '/solvequiz': (context)=> SolveQuiz()
       },
     );
   }
