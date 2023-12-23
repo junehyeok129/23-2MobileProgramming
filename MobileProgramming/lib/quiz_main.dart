@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:loa/main.dart';
+import 'package:loa/quiz_create.dart';
 import 'package:loa/solvequiz.dart';
 import 'loadrawer.dart';
 
 class quiz_main extends StatelessWidget {
+
+
   @override
 
   final List<Map<String, dynamic>> course = [
@@ -49,8 +52,11 @@ class quiz_main extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                //여기에 route 지정해줘서 움직이도록
-                Navigator.pushNamed(context, '/quiz_create');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => quiz_create(subject: name),
+                  ),
+                );
 
               },
               child: Container(

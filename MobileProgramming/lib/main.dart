@@ -43,8 +43,8 @@ class Loa extends StatelessWidget {
         '/board' : (context) => BoardInit(),
         '/pick' : (context) => Pick(),
         //'/content' : (context) => BoardTemplate(boardid: "1",),
-        '/quiz_create': (context)=> quiz_create(),
-        '/solvequiz': (context)=> SolveQuiz()
+        //'/quiz_create': (context)=> quiz_create(),
+        //'/solvequiz': (context)=> SolveQuiz()
       },
     );
   }

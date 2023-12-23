@@ -1,14 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:loa/loadrawer.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class SolveQuiz extends StatefulWidget {
+
+  final String quiznum;
+  final String subject;
+  SolveQuiz({required this.quiznum,required this.subject});
+
   @override
   _SolveQuizState createState() => _SolveQuizState();
 }
 
 class _SolveQuizState extends State<SolveQuiz> {
+  List<Map<String, dynamic>> course = [];
+
+  Future<void> fetchData() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/get_board'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'boardtype': 'board',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final dataList = jsonData['data'] as List<dynamic>;
+
+      print(jsonData['data']);
+      print(dataList);
+      setState(() {
+
+        course = dataList.map((data) => {
+          'id' : data['id'],
+          'user' : data['user'],
+          'title': data['title'],
+          'content' : data['content'],
+          'date': data['date'],
+          'like' : data['like'],
+          'dislike' : data['dislike'],
+          'anonymous': data['anonymous']
+        }).toList();
+      });
+    }
+  }
+
   final List<TextEditingController> quizControllers = [
     TextEditingController(),
     TextEditingController(),

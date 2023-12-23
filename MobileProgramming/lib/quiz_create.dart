@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:loa/loadrawer.dart';
+import 'package:loa/solvequiz.dart';
+
+
 class quiz_create extends StatefulWidget {
+
+  final String subject;
+  quiz_create({required this.subject});
   @override
   quiz_createState createState() => quiz_createState();
 }
 
 class quiz_createState extends State<quiz_create> {
-  List<String> numberOfQuiz = ['1','2','3','4','5','6','7','8'];
+  List<String> numberOfQuiz = ['1','2'];
   String first_number='1';
   bool isChecked = false;
   bool isChecked2 = false;
@@ -103,7 +109,15 @@ class quiz_createState extends State<quiz_create> {
                 child: ElevatedButton(
 
                     onPressed:(){
-                      Navigator.pushNamed(context, '/solvequiz');
+                      print(first_number);
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) => SolveQuiz(
+                            quiznum: first_number,
+                            subject: widget.subject,
+                          ),
+                        ),
+                      );
                     },
                     child: Text('CREATE',style: TextStyle(fontSize: 30,fontWeight: FontWeight.normal, color: Colors.black),)),
               ),

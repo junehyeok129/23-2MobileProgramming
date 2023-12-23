@@ -8,8 +8,6 @@ class BoardTemplate extends StatefulWidget {
   final String boardid;
   BoardTemplate({required this.boardid});
 
-
-
   @override
   _BoardTemplateState createState() => _BoardTemplateState();
 }
@@ -25,7 +23,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
   final TextEditingController _commentController = TextEditingController();
 
   List<Map<String, dynamic>> course = [];
-
+  List<Map<String, dynamic>> course2 = [];
   Future<void> fetchData() async {
     final response = await http.post(
       Uri.parse('http://127.0.0.1:5000/get_comment'),
@@ -50,11 +48,43 @@ class _BoardTemplateState extends State<BoardTemplate> {
       });
     }
   }
+  Future<void> fetchBoardData() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/get_board_content'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'boardid': widget.boardid,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData2 = jsonDecode(response.body);
+      final dataList2 = jsonData2['data'] as List<dynamic>;
+      setState(() {
+        print(dataList2);
+        course2 = dataList2.map((data) {
+          return {
+            'id': data['id'],
+            'user': data['user'],
+            'title': data['title'],
+            'content': data['content'],
+            'date': data['date'],
+            'like': data['like'],
+            'dislike': data['dislike'],
+            'anonymous': data['anonymous']
+          };
+        }).toList();
+      });
+    }
+  }
 
 
   @override
   void initState() {
     fetchData();
+    fetchBoardData();
     super.initState();
   }
   List<Comment> comments = [];
@@ -100,7 +130,8 @@ class _BoardTemplateState extends State<BoardTemplate> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Q. Dart가 너무 어려워요",
+                        'Q. ${course2[0]['title']}',
+                        //"Q. Dart가 너무 어려워요",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -114,21 +145,27 @@ class _BoardTemplateState extends State<BoardTemplate> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Expanded(child: Row(
-                        children: [
-                          Text('2023.10.04 00:37'),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('익명'),
-                          SizedBox(
-                            width: 15,
-                          ),
-                        ],
-                      ))
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, // 오른쪽 정렬을 위한 설정
+                          children: [
+                            Text(
+                              '작성자 : ${course2[0]['user']}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                          ],
+                        ),
+                      ),
+
                     ],
                   ),
-
+                  Divider(thickness: 1, height: 1, color: Colors.black),
                   // 본문 내용 추가
 
                   Padding(
@@ -138,7 +175,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
                         SizedBox(width: 15),
                         SizedBox(
                           width: 350,
-                            child : Text("String textContent = 'dart를 공부하려는데 하나도 모르겠어요. 어쩌죠? 진짜 급해요 어떻게해요 정말 진짜 미치겠어요 네? ㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ대ㅔ';",
+                            child : Text('${course2[0]['content']}',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold
@@ -170,6 +207,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
                       ),
                     ],
                   ),
+                  Divider(thickness: 1, height: 1, color: Colors.black),
                   // 데이터를 사용하여 질문과 작성 시간, 작성자 이름, 본문 내용 표시
                   for (var courseItem in course)
                     Column(
@@ -214,6 +252,7 @@ class _BoardTemplateState extends State<BoardTemplate> {
                         ),
                       ],
                     ),
+                  Divider(thickness: 1, height: 1, color: Colors.black),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(

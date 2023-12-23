@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
+import 'package:loa/boardTemplate.dart';
 
 // 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class BoardList extends StatefulWidget {
@@ -38,8 +39,14 @@ class _BoardListState extends State<BoardList> {
       setState(() {
 
         course = dataList.map((data) => {
+          'id' : data['id'],
+          'user' : data['user'],
           'title': data['title'],
-          // 필요한 다른 필드도 추가할 수 있음
+          'content' : data['content'],
+          'date': data['date'],
+          'like' : data['like'],
+          'dislike' : data['dislike'],
+          'anonymous': data['anonymous']
         }).toList();
       });
     }
@@ -129,6 +136,7 @@ class _BoardListState extends State<BoardList> {
       itemCount: course.length,
       itemBuilder: (BuildContext context, int i) {
         String name = course[i]['title'];
+        String boardid = '${course[i]['id']}';
         //String professor = course[i]['professor'];
 
         return Column(
@@ -138,7 +146,11 @@ class _BoardListState extends State<BoardList> {
             ),
             InkWell(
               onTap: () {
-                // 여기에 route 지정해줘서 움직이도록
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => BoardTemplate(boardid: boardid,),
+                  ),
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
