@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loa/main.dart';
 import 'package:loa/login.dart';
+import 'package:loa/quiz_main.dart';
 import 'package:loa/signup.dart';
 import 'package:loa/loadrawer.dart';
 import 'package:loa/makequiz.dart';
@@ -52,7 +53,7 @@ class QuizInit extends StatelessWidget {
         drawer: LoaDrawer(),
         body: TabBarView(
           children: [
-            SolveQuiz(),
+            quiz_main(),
             MakeQuiz()
           ],
         ),
