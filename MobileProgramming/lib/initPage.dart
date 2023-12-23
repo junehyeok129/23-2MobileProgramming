@@ -4,6 +4,7 @@ import 'package:loa/login.dart';
 import 'package:loa/signup.dart';
 import 'loadrawer.dart';
 
+// 탭바 속 내용 조찬희 제작, 나머지 최준혁 제작
 class InitPage extends StatelessWidget {
   @override
 

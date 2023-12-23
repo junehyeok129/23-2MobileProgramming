@@ -3,6 +3,8 @@ import 'package:loa/main.dart';
 import 'loadrawer.dart';
 import 'questionList.dart';
 
+
+// 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class BoardInit extends StatelessWidget {
 
   @override

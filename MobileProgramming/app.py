@@ -133,10 +133,11 @@ def get_comment():
     conn = sqlite3.connect('./database.db')
     cursor = conn.cursor()
     
-    cursor.execute('SELECT * FROM boardcomment WHERE boardid = %s'.format(boardid))
+    cursor.execute('SELECT * FROM boardcomment WHERE boardid = ?'.format(boardid))
     
     return jsonify({'success' : True, 'message' : "조회 성공"})
-    
+
+
 @app.route('/get_petInfo', methods=['POST'])
 def get_pet_info():
     data = request.json
@@ -163,7 +164,7 @@ def get_pet_info():
     return jsonify(pet_info), 200
 
 
-@app.route('/get_', methods=['POST'])
+@app.route('/get_comment', methods=['POST'])
 def get_pet_info_Home():
     data = request.json
     username = data.get('username')

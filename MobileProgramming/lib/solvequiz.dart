@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+// 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class SolveQuiz extends StatefulWidget {
   @override
   _SolveQuizState createState() => _SolveQuizState();

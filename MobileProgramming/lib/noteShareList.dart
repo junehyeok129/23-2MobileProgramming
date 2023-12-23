@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
-
+// 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class NoteShareList extends StatefulWidget {
   final String subject;
 

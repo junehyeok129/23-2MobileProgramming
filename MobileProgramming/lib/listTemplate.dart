@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loa/main.dart';
 import 'loadrawer.dart';
-
+// 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class ListTemplate extends StatelessWidget {
   @override
 

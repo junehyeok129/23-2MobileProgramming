@@ -3,6 +3,7 @@ import 'package:loa/login.dart';
 import 'package:loa/signup.dart';
 import 'package:loa/listTemplate.dart';
 
+// 최준혁 제작
 class AppScaffold extends StatefulWidget {
   final Widget body;
   AppScaffold({required this.body});

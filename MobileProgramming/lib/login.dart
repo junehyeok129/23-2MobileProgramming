@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:loa/initPage.dart';
 import 'package:loa/signup.dart';
 
-
+// 최준혁 제작
 class Login extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();

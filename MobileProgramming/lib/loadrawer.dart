@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+// 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
 class LoaDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,7 @@ class LoaDrawer extends StatelessWidget {
             buildDrawerItem(context, Icons.note_alt_outlined, '게시판', '/board'),
             buildDrawerItem(context, Icons.note_alt_outlined, 'pick', '/pick'),
             buildDrawerItem(context, Icons.exit_to_app, '로그아웃', null), // 로그아웃 아이템에 route는 null
+            buildDrawerItem(context, Icons.account_circle, 'test', '/content')
           ],
         ),
       ),

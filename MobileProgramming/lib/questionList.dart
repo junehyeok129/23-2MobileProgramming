@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
+import 'package:loa/boardTemplate.dart';
+
 
 class QuestionList extends StatefulWidget {
   final String subject;
@@ -38,8 +40,11 @@ class _QuestionListState extends State<QuestionList> {
 
         course = dataList.map((data) => {
           'title': data['title'],
+          'id' : data['id']
           // 필요한 다른 필드도 추가할 수 있음
         }).toList();
+        print("이게 코스다!");
+        print(course);
       });
     }
   }
@@ -126,8 +131,7 @@ class _QuestionListState extends State<QuestionList> {
       itemCount: course.length,
       itemBuilder: (BuildContext context, int i) {
         String name = course[i]['title'];
-        //String professor = course[i]['professor'];
-
+        String boardid = '${course[i]['id']}';
         return Column(
           children: [
             Container(
@@ -135,7 +139,12 @@ class _QuestionListState extends State<QuestionList> {
             ),
             InkWell(
               onTap: () {
-                // 여기에 route 지정해줘서 움직이도록
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => BoardTemplate(boardid: boardid),
+                    ),
+                );
+
               },
               child: Container(
                 decoration: BoxDecoration(

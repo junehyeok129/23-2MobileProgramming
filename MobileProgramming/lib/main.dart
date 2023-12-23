@@ -12,7 +12,9 @@ import 'package:loa/noteshareInit.dart';
 import 'package:loa/boardInit.dart';
 import 'questionInit.dart';
 import 'package:loa/pick.dart';
+import 'package:loa/boardTemplate.dart';
 
+//최준혁 제작
 void main() {
   runApp(const Loa());
 }
@@ -36,7 +38,10 @@ class Loa extends StatelessWidget {
         '/question' : (context) => QuestionInit(),
         '/sharenote' : (context) => NoteShareInit(),
         '/board' : (context) => BoardInit(),
-        '/pick' : (context) => Pick()
+        '/pick' : (context) => Pick(),
+        '/content' : (context) => BoardTemplate(
+          boardid: "1",
+        )
       },
     );
   }

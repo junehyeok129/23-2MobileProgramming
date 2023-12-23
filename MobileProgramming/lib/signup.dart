@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+
+// 최준혁 제작
 class Signup extends StatefulWidget {
   @override
   _SignupState createState() => _SignupState();
