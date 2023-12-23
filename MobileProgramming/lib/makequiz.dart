@@ -8,10 +8,10 @@ class MakeQuiz extends StatefulWidget {
 
 class _MakeQuizState extends State<MakeQuiz> {
   final TextEditingController questionController = TextEditingController();
-
+  final TextEditingController answer_controller= TextEditingController();
   List<String> course = [
     '모바일 프로그래밍', '멀티코어 컴퓨팅', '알고리즘', '데이터베이스 설계', '이산수학'];
-  List<String> type = ['객관식'];//, '주관식'
+  List<String> type = ['객관식','주관식'];
   List<String> correctAnswer = ['1', '2', '3'];
 
   String selectedCourse = '모바일 프로그래밍';
@@ -105,26 +105,41 @@ class _MakeQuizState extends State<MakeQuiz> {
                 ],
               ),
             ),
-          Container(
-            child: Column(
-              children: [
-                Text('Correct Answer'),
-                DropdownButton(
-                  isExpanded: true,
-                  borderRadius: BorderRadius.circular(10),
-                  items: correctAnswer
-                      .map((e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(e),
-                  ))
-                      .toList(),
-                  onChanged: (value) {
-                    // items 의 DropdownMenuItem 의 value 반환
-                  },
-                )
-              ],
+
+          if(selectedType=='객관식')
+            Container(
+              child: Column(
+                children: [
+                  Text('Correct Answer'),
+                  DropdownButton(
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(10),
+                    items: correctAnswer
+                        .map((e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(e),
+                    ))
+                        .toList(),
+                    onChanged: (value) {
+                      // items 의 DropdownMenuItem 의 value 반환
+                    },
+                  )
+                ],
+              ),
             ),
-          ),
+          if(selectedType=='주관식')
+            Container(
+              padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
+              child: Column(
+                children: [
+                  Text('Correct Answer'),
+                  TextField(
+                    controller: answer_controller,
+                  )
+                ],
+              ),
+            ),
+
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -145,4 +160,5 @@ class _MakeQuizState extends State<MakeQuiz> {
     super.dispose();
   }
 }
+
 
