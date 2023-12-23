@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
 
+
+// 최준혁 제작
 class Pick extends StatefulWidget {
 
   @override
@@ -34,6 +36,16 @@ class _PickState extends State<Pick> {
             color: Colors.black,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+          ),
+        ],
+
       ),
 
       drawer: LoaDrawer(),

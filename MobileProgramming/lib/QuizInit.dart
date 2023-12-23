@@ -7,7 +7,7 @@ import 'package:loa/loadrawer.dart';
 import 'package:loa/makequiz.dart';
 import 'package:loa/solvequiz.dart';
 
-
+// 조찬희 템플릿 제작, 최준혁 통신 및 DB 연결
 class QuizInit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,16 @@ class QuizInit extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                Navigator.pop(context);
+
+              },
+            ),
+          ],
+
           bottom: TabBar(
             tabs: [
               Tab(

@@ -3,28 +3,30 @@ import 'package:loa/loadrawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
-class SolveQuiz extends StatefulWidget {
 
+
+// 조찬희 템플릿 제작, 최준혁 통신 및 DB 연결
+class SolveQuiz extends StatefulWidget {
   final String quiznum;
   final String subject;
-  SolveQuiz({required this.quiznum,required this.subject});
+  
+  SolveQuiz({required this.quiznum, required this.subject});
 
   @override
   _SolveQuizState createState() => _SolveQuizState();
 }
 
 class _SolveQuizState extends State<SolveQuiz> {
-  List<Map<String, dynamic>> course = [];
+  List<Map<String, dynamic>> quizItems = [];
 
   Future<void> fetchData() async {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:5000/get_board'),
+      Uri.parse('http://127.0.0.1:5000/make_quiz'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode({
-        'boardtype': 'board',
+        'subject': widget.subject,
       }),
     );
 
@@ -35,64 +37,69 @@ class _SolveQuizState extends State<SolveQuiz> {
       print(jsonData['data']);
       print(dataList);
       setState(() {
-
-        course = dataList.map((data) => {
-          'id' : data['id'],
-          'user' : data['user'],
-          'title': data['title'],
-          'content' : data['content'],
-          'date': data['date'],
-          'like' : data['like'],
-          'dislike' : data['dislike'],
-          'anonymous': data['anonymous']
+        quizItems = dataList.map((data) {
+          return {
+            'id': data['quizid'],
+            'user': data['subject'],
+            'title': data['question'],
+            'content': data['answersheet'],
+            'date': data['answer'],
+          };
         }).toList();
       });
     }
   }
 
-  final List<TextEditingController> quizControllers = [
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
 
-  List<Map<String, dynamic>> quizItems = [
-    {
-      'question': '1번 문제',
-      'answer': '1번 답안',
-    },
-    {
-      'question': '21번 문제',
-      'answer': '2번 답안',
-    },
-  ];
+  final List<TextEditingController> quizControllers = [];
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < int.parse(widget.quiznum); i++) {
+      quizControllers.add(TextEditingController());
+    }
+
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         leading: Builder(
-        builder: (BuildContext context) {
-      return IconButton(
-        onPressed: () {
-          Scaffold.of(context).openDrawer();
-        },
-        icon: Image.asset('assets/images/menulogo.png'),
-      );
-    },
-    ),
-    title: Text(
-    'Quiz',
-    style: TextStyle(
-    color: Colors.black,
-    ),
-    ),),
+          builder: (BuildContext context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: Image.asset('assets/images/menulogo.png'),
+            );
+          },
+        ),
+        title: Text(
+          'Quiz',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+          ),
+        ],
+
+      ),
       drawer: LoaDrawer(),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: quizItems.length,
+        itemCount: int.parse(widget.quiznum),
         itemBuilder: (BuildContext context, int i) {
-          String question = quizItems[i]['question'];
+          if (i >= quizItems.length) return Container();
+          String question = quizItems[i]['title'];
 
           return Padding(
             padding: const EdgeInsets.all(20.0),
@@ -103,13 +110,12 @@ class _SolveQuizState extends State<SolveQuiz> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                        spreadRadius:5,
+                    spreadRadius: 5,
                     blurRadius: 7,
-                      offset: Offset(0,3)
+                    offset: Offset(0, 3),
                   )
-                ]
+                ],
               ),
-
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
@@ -117,7 +123,7 @@ class _SolveQuizState extends State<SolveQuiz> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      'Q$i: $question',
+                      'Question ${i + 1}: $question',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -130,7 +136,6 @@ class _SolveQuizState extends State<SolveQuiz> {
                       controller: quizControllers[i],
                       decoration: InputDecoration(
                         labelText: 'Answer',
-
                       ),
                     ),
                   ],
@@ -140,12 +145,12 @@ class _SolveQuizState extends State<SolveQuiz> {
           );
         },
       ),
+
       bottomNavigationBar: BottomAppBar(
         child: ElevatedButton(
           onPressed: () {
             // submit logic 구현
             checkAnswers();
-
           },
           child: Text('Submit'),
         ),
@@ -157,14 +162,14 @@ class _SolveQuizState extends State<SolveQuiz> {
     List<String> correctAnswers = [];
     List<String> incorrectAnswers = [];
 
-    for (int i = 0; i < quizItems.length; i++) {
+    for (int i = 1; i < quizItems.length; i++) {
       String enteredAnswer = quizControllers[i].text;
-      String correctAnswer = quizItems[i]['answer'];
+      String correctAnswer = quizItems[i]['content'];
 
       if (enteredAnswer == correctAnswer) {
-        correctAnswers.add('Q${i + 1}: $correctAnswer');
+        correctAnswers.add('Question ${i + 1}: Correct');
       } else {
-        incorrectAnswers.add('Q${i + 1}: Correct Answer is $correctAnswer');
+        incorrectAnswers.add('Question ${i + 1}: Incorrect');
       }
     }
     showDialog(
@@ -199,10 +204,8 @@ class _SolveQuizState extends State<SolveQuiz> {
     );
   }
 
-
   @override
   void dispose() {
-    // Dispose of the controllers when the widget is removed from the widget tree
     for (var controller in quizControllers) {
       controller.dispose();
     }

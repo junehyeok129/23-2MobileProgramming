@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loa/main.dart';
 import 'package:loa/loadrawer.dart';
 
+
+// 최준혁 제작
 class AutoAdjustTextSize extends StatefulWidget {
   @override
   _AutoAdjustTextSizeState createState() => _AutoAdjustTextSizeState();

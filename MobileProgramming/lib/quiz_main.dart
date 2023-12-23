@@ -4,6 +4,8 @@ import 'package:loa/quiz_create.dart';
 import 'package:loa/solvequiz.dart';
 import 'loadrawer.dart';
 
+
+// 조찬희 템플릿 제작, 최준혁 통신 및 DB 연결
 class quiz_main extends StatelessWidget {
 
 

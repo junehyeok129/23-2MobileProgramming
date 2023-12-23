@@ -17,7 +17,7 @@ import 'package:loa/boardTemplate.dart';
 import 'solvequiz.dart';
 
 
-//최준혁 제작
+//최준혁 조찬희 제작
 void main() {
   runApp(const Loa());
 }

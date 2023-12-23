@@ -226,86 +226,30 @@ def get_pet_info_Home():
 
     return jsonify(pet_info), 200
 
-@app.route('/get_heart_rate_data', methods=['GET'])
-def get_heart_rate_data():
-    # 가상의 심박수 데이터 생성 (여기서는 무작위 데이터 생성)
-    df = pd.read_excel('./data.xlsx')
-    df.set_index('Date', inplace=True)
-    df_resampled = df.resample('1Min').mean()
-    df_resampled = df_resampled.round(1)
-    df_resampled = df_resampled.drop(['Unnamed: 0'],axis=1)
-    heart = df_resampled.drop(['Temp','Walk'],axis = 1)
-    heart = heart.reset_index()
-    #data = heart.to_json(orient='records', date_format='iso')
-    data = heart.to_dict(orient='records')
-    pretty_data = json.dumps(data, indent=4, default=str)
-
-    return Response(pretty_data)
-
-@app.route('/get_temp_rate_data', methods=['GET'])
-def get_temp_rate_data():
-    # 가상의 심박수 데이터 생성 (여기서는 무작위 데이터 생성)
-    df = pd.read_excel('./data.xlsx')
-    df.set_index('Date', inplace=True)
-    df_resampled = df.resample('1Min').mean()
-    df_resampled = df_resampled.round(1)
-    df_resampled = df_resampled.drop(['Unnamed: 0'],axis=1)
-    heart = df_resampled.drop(['Heart','Walk'],axis = 1)
-    heart = heart.reset_index()
-    #data = heart.to_json(orient='records', date_format='iso')
-    data = heart.to_dict(orient='records')
-    pretty_data = json.dumps(data, indent=4, default=str)
-
-    return Response(pretty_data)
-
-
-@app.route('/get_live_bio', methods=['POST'])
-def get_live_bio():
-    input_file_path = './sensor_value.txt'  # 입력 파일 경로에 맞게 수정
-
-    data_groups = []
-
-    current_data_group = []
-
-
-    with open(input_file_path, 'r') as input_file, open("./temp_file.txt", 'w') as temp_file:
-        current_datetime = None  # 현재 데이터 묶음의 시작 시간
-        lines_count = 0
-        for line in input_file:
-            if len(line) == 1:
-                lines_count = 0
-            else:
-                lines_count += 1
-                if lines_count == 1:
-                    date_string = line.strip()
-                    date_format = "%Y-%m-%d %H:%M:%S"
-                    datetime_object = datetime.strptime(date_string, date_format)
-                    current_data_group.append(datetime_object)
-                elif lines_count == 2:
-                    temperature_match = line.replace("Temperature = ","")
-                    current_data_group.append(float(temperature_match.rstrip()))
-                elif lines_count == 3:
-                    walk_match = line.replace("Walk = ","")
-                    current_data_group.append(walk_match.rstrip())
-                elif lines_count == 4:
-                    if len(line) == 3:
-                        pass
-                    else:
-                        heart_rate_match = line.replace("HeartRate =","")
-                        current_data_group.append(int(heart_rate_match.rstrip()))
-                        data_groups.append(current_data_group)
-                        current_data_group = []
-                elif lines_count == 5:
-                    line = line.rstrip()
-                    heart_rate_matc = line.split('=')[1]
-                    current_data_group.append(int(heart_rate_match.rstrip()))
-                    data_groups.append(current_data_group)
-                    current_data_group = []
-
-    with open(input_file_path, 'w') as input_file:
-        input_file.write('\n\n')
-
-    return jsonify(data_groups[-1]), 200
+@app.route('/make_quiz',methods=['POST'])
+def make_quiz():
+    data = request.json
+    subject = data.get('subject')
+    
+    conn = sqlite3.connect('./database.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT * FROM quiz WHERE subject = ?', (SUBJECT_DATA[subject],))
+    rows = cursor.fetchall()
+    
+    comment_list = []
+    for row in rows:
+        print(row)
+        comment_dict = {
+            'quizid': row[0],
+            'subject': row[1],
+            'question': row[2],
+            'answersheet': row[3],
+            'answer': row[4]
+        }
+        comment_list.append(comment_dict)
+    
+    return jsonify({'success' : True, 'message' : "조회 성공",'data' : comment_list})
     
 if __name__ == '__main__':
     app.run(debug=True)

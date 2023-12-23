@@ -80,6 +80,16 @@ class _BoardListState extends State<BoardList> {
                 color: Colors.black,
               ),
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  Navigator.pop(context);
+
+                },
+              ),
+            ],
+
           ),
 
           drawer: LoaDrawer(),
@@ -116,6 +126,16 @@ class _BoardListState extends State<BoardList> {
               color: Colors.black,
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                Navigator.pop(context);
+
+              },
+            ),
+          ],
+
         ),
 
         drawer: LoaDrawer(),

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loa/loadrawer.dart';
 
-
+// 김지훈, 최준혁 템플릿 작성, 최준혁 DB 및 통신 연결
 class BoardTemplate extends StatefulWidget {
   final String boardid;
   BoardTemplate({required this.boardid});
@@ -108,6 +108,16 @@ class _BoardTemplateState extends State<BoardTemplate> {
             color: Colors.black,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+          ),
+        ],
+
       ),
       drawer: LoaDrawer(),
       body: ListView(

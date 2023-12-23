@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:loa/loadrawer.dart';
 import 'package:loa/boardTemplate.dart';
 
-
+// 조찬희 템플릿 제작 최준혁 DB 및 통신 연결
 class QuestionList extends StatefulWidget {
   final String subject;
 
@@ -81,6 +81,16 @@ class _QuestionListState extends State<QuestionList> {
                 color: Colors.black,
               ),
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  Navigator.pop(context);
+
+                },
+              ),
+            ],
+
           ),
           drawer: LoaDrawer(),
           body: Center(
@@ -116,6 +126,16 @@ class _QuestionListState extends State<QuestionList> {
               color: Colors.black,
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                Navigator.pop(context);
+
+              },
+            ),
+          ],
+
         ),
 
         drawer: LoaDrawer(),

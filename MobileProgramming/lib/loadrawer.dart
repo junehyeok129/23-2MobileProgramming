@@ -35,7 +35,6 @@ class LoaDrawer extends StatelessWidget {
             buildDrawerItem(context, Icons.note_alt_outlined, '게시판', '/board'),
             buildDrawerItem(context, Icons.note_alt_outlined, 'pick', '/pick'),
             buildDrawerItem(context, Icons.exit_to_app, '로그아웃', null), // 로그아웃 아이템에 route는 null
-            buildDrawerItem(context, Icons.account_circle, 'test', '/content')
           ],
         ),
       ),

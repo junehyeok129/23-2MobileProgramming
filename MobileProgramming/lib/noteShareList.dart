@@ -80,6 +80,16 @@ class _NoteShareListState extends State<NoteShareList> {
               color: Colors.black,
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                Navigator.pop(context);
+
+              },
+            ),
+          ],
+
         ),
         drawer: LoaDrawer(),
           floatingActionButton: FloatingActionButton(
@@ -115,6 +125,16 @@ class _NoteShareListState extends State<NoteShareList> {
             color: Colors.black,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+          ),
+        ],
+
       ),
       drawer: LoaDrawer(),
       body: showlist(),

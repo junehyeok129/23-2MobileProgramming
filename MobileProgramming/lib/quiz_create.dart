@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loa/loadrawer.dart';
 import 'package:loa/solvequiz.dart';
 
-
+// 조찬희 템플릿 제작, 최준혁 통신 및 DB 연결
 class quiz_create extends StatefulWidget {
 
   final String subject;

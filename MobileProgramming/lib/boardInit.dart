@@ -51,6 +51,16 @@ class BoardInit extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+          ),
+        ],
+
       ),
       drawer: LoaDrawer(),
 
