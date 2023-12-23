@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loa/loadrawer.dart';
 
 
 // 조찬희 템플릿 작성, 최준혁 DB 및 통신 연결
@@ -27,6 +28,18 @@ class _SolveQuizState extends State<SolveQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Column(
+            children: [
+              Text('QUIZ'),
+              Text('과목명',style: TextStyle(fontSize: 10),)
+            ],
+          ),
+        ),
+
+      ),
+      drawer: LoaDrawer(),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: quizItems.length,
@@ -36,28 +49,43 @@ class _SolveQuizState extends State<SolveQuiz> {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              color: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    'Q$i: $question',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                        spreadRadius:5,
+                    blurRadius: 7,
+                      offset: Offset(0,3)
+                  )
+                ]
+              ),
+
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Q$i: $question',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: quizControllers[i],
-                    decoration: InputDecoration(
-                      labelText: 'Answer',
+                    Container(
+                      height: 10,
                     ),
-                  ),
-                ],
+                    TextField(
+                      controller: quizControllers[i],
+                      decoration: InputDecoration(
+                        labelText: 'Answer',
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
